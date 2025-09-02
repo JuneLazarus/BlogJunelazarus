@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.css">
+    <title>日程清单_账号注册</title>
+    <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
+</head>
+<body>
+    <div class="box" id="auth-container">   
+        <div class="left"></div>
+        <div class="right">
+            <form action="PC.html" method="GET" id="register-form" style="display: none;">
+            <h4 class="reg" style="display: flex; justify-content: center; align-items: center;">注册</h4>   
+                <input class="acc-contact-input" type="text" placeholder="用户名">
+                <input class="contact-input" type="phone" placeholder="手机号">
+                <input class="contact-input" type="email" placeholder="邮箱">
+                <input class="acc" type="password" placeholder="密码">
+                <input class="acc" type="password" placeholder="确认密码">
+                <button class="submit" type="submit">注 册</button>
+            
+        </form>
+        <form action="PC.html" method="GET" id="login-form">
+            <h4 class="log" style="display: flex; justify-content: center; align-items: center;">登录</h4>  
+                <input class="login" type="text" placeholder="用户名">
+                //登录和注册页面都只有UI,没有实际功能  
+                <input class="login" type="password" placeholder="密码">
+                //注册时手机号输入13345654321即可
+                <button class="submit2" type="submit">登 录</button>
+                //邮箱不用输入,密码不要用自己的常用密码
+            
+        </form>
+        <div class="fn" style="display: flex; justify-content: center; align-items: center;">
+            <a href="forgot-password.html">忘记密码</a>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+        <button id="toggle-button">还没有账号？去注册</button>
+        </div>
+        </div>
+    <script>
+        const toggleButton = document.getElementById('toggle-button');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+
+        toggleButton.addEventListener('click', () => {
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                toggleButton.textContent = '还没有账号？去注册';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                toggleButton.textContent = '已有帐号？去登录';
+            }
+        });
+
+        const form = document.querySelector('form');
+        const contactInputs = document.querySelectorAll('.contact-input');
+        const errorTip = document.querySelector('.error-tip');
+        const passwordInput = document.querySelector('input[type="password"]');
+        const confirmPasswordInput = document.querySelector('input[type="password"]:nth-of-type(2)');
+        const saveBtn = document.querySelector('submit');
+        contactInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                errorTip.style.display = 'none';
+            });
+        });
+        form.addEventListener('submit', function(e) {
+            const hasUsername = document.querySelector('.acc-contact-input').value.trim() !== '';
+            if (!hasUsername) {
+                e.preventDefault();
+                alert('用户名不能为空');
+                errorTip.style.display = 'block';
+                return;
+            }
+            const hasContact = Array.from(contactInputs).some(input => input.value.trim() !== '');
+            if (!hasContact) {
+                e.preventDefault();
+                alert('手机号或邮箱请至少填写一项');
+                errorTip.style.display = 'block';
+                return;
+            }
+            const phone = contactInputs[0].value.trim();
+            const phoneRegex = /^1[3-9]\d{9}$/;
+            if (phone && !phoneRegex.test(phone)) {
+                e.preventDefault();
+                alert('手机号格式不正确');
+                errorTip.style.display = 'block';
+                return;
+            }
+            const email = contactInputs[1].value.trim();
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email && !emailRegex.test(email)) {
+                e.preventDefault();
+                alert('邮箱格式不正确');
+                errorTip.style.display = 'block';
+                return;
+            }
+            if(passwordInput.value.length < 8) {
+                e.preventDefault();
+                alert('密码长度不能少于8位');   
+                errorTip.style.display = 'block';
+                return;
+            }
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                e.preventDefault();
+                alert('两次输入密码不一致');
+                errorTip.style.display = 'block';
+                return;
+            }
+        });
+        saveBtn.addEventListener('click', function() {
+            const username = usernameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const confirmPassword = confirmPasswordInput.value.trim();
+            if (password,value !== confirmPassword.value) {
+                alert('确认密码与密码不一致，请重新输入！');
+                return;
+        }
+        const userInfo = {
+            username: username,
+            phone: phone,
+            email: email,
+            password: password
+        };
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        alert('注册成功！');
+        window.location.href = 'login.html';
+    });
+    const useform = document.querySelector('form');
+    useform.addEventListener('acc', function(e) {
+        const username = document.querySelector('input[type="text"]').value.trim();
+        const password = document.querySelector('input[type="password"]').value;
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (!storedUserInfo || storedUserInfo.username !== username || storedUserInfo.password !== password) {
+            e.preventDefault();
+            alert('用户名或密码错误');
+        } else {
+            alert('登录成功！');
+        }
+    });
+    console.log("byd页面终于正常了");
+    console.log("不会后端是这样的，只能套个空壳");
+    console.log("如果看到这条，请一定记住：登录和注册页面都只有UI,没有实际功能，所以注册时手机号输入13345654321即可，邮箱不需要输入,密码不要用自己的常用密码");
+    console.log("其实还有更方便的办法，就是直接点击登录，登录没有设限制，啥都不用输入就能进入功能界面");
+    console.log("还没有做登录状态，因为懒");
+    console.log("全部由你们的浩展大王单独完成");
+    console.log("本人是菜鸟，水平有限，各位大佬发现问题可以告诉我或者直接帮我修复，但不准在背后骂我");
+    console.log("2025年9月2日晚23时32分");
+</script>
+<style>
+    *{
+    font-family: 'SongTi', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    font-size: 10px;
+}
+html::before{
+    content: "";
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to right,rgba(44,114,251,1), rgb(226, 109, 255),rgb(255, 83, 140))no-repeat;
+    z-index: -1;
+}
+::selection{
+    color:#fff;
+    background:rgb(255, 13, 13);
+}
+.box{
+    display: flex;
+    overflow: hidden;
+    width: 90rem;
+    height: 55rem;
+    background-color:rgba(255,255,255,60%) ;
+    border-radius: 1.5rem;
+    margin: 10% auto;
+    box-shadow: 0 0 1rem 0.2rem rgb(0,0,0,10%);
+}
+.left{
+    position: relative;
+    width: 45%;
+    height: 100%;
+    background-color: skyblue;
+    opacity: 0.6;
+}
+.left::before{
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-image:url(gxc1.jpg);
+    background-size:auto 100%;
+    margin-left: 0;
+    opacity: 0.9;
+}
+.right{
+    display: flex;
+    width:55%;
+    height:100%;
+    flex-direction: column;
+    align-items: center;
+}
+.right h4{
+    color:rgb(243, 53, 110);
+    font-size: 3rem;
+    margin-top: 5rem;
+}
+.right form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.right form .acc{
+    outline: none;
+    width: 80%;
+    height: 5rem;
+    font-size: 1.6rem;
+    margin-top: 0.8rem;
+    margin-left: 4.6rem;
+    padding: 1rem 0 0 1.2rem;
+    border:none;
+    border-bottom: 1px solid rgb(255, 13, 13);
+    color:rgb(0,0,0);
+    background-color: rgba(0,0,0,0);   
+    justify-content: center;
+    align-items: center;
+}
+.right form .acc:focus{
+    outline: none;
+    color:rgb(0,0,0);
+    padding:1rem 0 0 1.6rem;
+}
+.right form .acc-contact-input{
+    outline: none;
+    width: 80%;
+    height: 5rem;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    margin-left: 4.6rem;
+    padding: 1rem 0 0 1.2rem;
+    border:none;
+    border-bottom: 1px solid rgb(255, 13, 13);
+    color:rgb(0,0,0);
+    background-color: rgba(0,0,0,0);   
+    justify-content: center;
+    align-items: center;
+}
+.right form .acc-contact-input:focus{
+    outline: none;
+    color:rgb(0,0,0);
+    padding:1rem 0 0 1.6rem;
+}
+.right form .contact-input{
+    outline: none;
+    width: 80%;
+    height: 5rem;
+    font-size: 1.6rem;
+    margin-top: 0.8rem;
+    margin-left: 4.6rem;
+    padding: 1rem 0 0 1.2rem;
+    border:none;
+    border-bottom: 1px solid rgb(255, 13, 13);
+    color:rgb(0,0,0);
+    background-color: rgba(0,0,0,0);   
+    justify-content: center;
+    align-items: center;
+}
+.right form .contact-input:focus{
+    outline: none;
+    color:rgb(0,0,0);
+    padding:1rem 0 0 1.6rem;
+}
+.right form .login{
+    outline: none;
+    width: 60%;
+    height: 5rem;
+    font-size: 1.6rem;
+    margin-top: 5rem;
+    padding: 1rem 0 0 1.6rem;
+    border:none;
+    border-bottom: 1px solid rgb(255, 13, 13);
+    color:rgb(0,0,0);
+    background-color: rgba(0,0,0,0);   
+    justify-content: center;
+    align-items: center;
+}
+.right form .login:focus{
+    outline: none;
+    color:rgb(0,0,0);
+    padding:1rem 0 0 1.6rem;
+}
+.right .submit{
+    width: 60%;
+    height:5rem;
+    color:white;
+    background-image:linear-gradient(120deg,rgba(44,114,251,1) 0%, rgb(226, 109, 255),rgb(255, 83, 140) 100%);
+    font-size:2rem;
+    border:none;
+    border-radius: 0.5rem;
+    margin: 2rem 0 0 50%;
+    transform: translateX(-50%);
+}
+.right .submit::before {
+    content: ''; 
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(to right, rgba(44,114,251,1), rgb(226, 109, 255), rgba(250, 67, 67, 0.986), rgba(44,114,251,1));
+    background-size: 400%;
+    border-radius: 20px;
+    opacity: 0;
+}
+.right .submit:hover::before {
+    filter: blur(20px);
+    opacity: 1;
+    animation: animation 12s linear infinite;
+}
+.right .submit2{
+    width: 60%;
+    height:5rem;
+    color:white;
+    background-image:linear-gradient(120deg,rgba(44,114,251,1) 0%, rgb(226, 109, 255),rgb(255, 83, 140) 100%);
+    font-size:2rem;
+    border:none;
+    border-radius: 0.5rem;
+    margin: 6rem 0 0 50%;
+    transform: translateX(-50%);
+}
+.right .submit2:hover{
+    box-shadow: 0 0 2rem -0.5rem rgb(0,0,0/15%);
+}
+.right .submit2::before {
+    content: ''; 
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(to right, rgba(44,114,251,1), rgb(226, 109, 255), rgba(250, 67, 67, 0.986), rgba(44,114,251,1));
+    background-size: 400%;
+    border-radius: 20px;
+    opacity: 0;
+}
+.right .submit2:hover::before {
+    filter: blur(20px);
+    opacity: 1;
+    animation: animation 12s linear infinite;
+}
+.right form .login{
+    outline: none;
+    width: 80%;
+    height: 5rem;
+    font-size: 1.6rem;
+    margin-top: 5rem;
+    margin-left: 4rem;
+    padding: 1rem 0 2rem;
+    border:none;
+    border-bottom: 1px solid rgb(255, 13, 13);
+    color:rgb(0,0,0);
+    background-color: rgba(0,0,0,0);   
+}
+.right form .login:focus{
+    outline: none;
+    color:rgb(0,0,0);
+    padding:1rem 0 0 1.6rem;
+}
+.right .fn{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    width: 70%;
+}
+.right .fn a{
+    text-decoration: none;
+    margin-top: 1.2rem;
+    padding: 0.5rem 1rem;
+    color:#666;
+    font-size: 1.3rem;
+}
+.right .fn a:hover{
+    color:rgb(255, 13, 13);
+}
+#toggle-button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    font-size: 1.3rem;
+    color:#666;
+    text-decoration: none; 
+    margin-top: 0; 
+    cursor: pointer; 
+    outline: none;
+    float:right;
+}
+#toggle-button:hover {
+    color:rgb(255, 13, 13);
+    text-decoration: none; 
+}
+</style>
+</body>
+</html>
