@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程表</title>
+    <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
+    
+</head>
+<body>
+    <a href="PC.html" 
+       style="position: fixed; 
+              top: 25px; 
+              left: 4%; 
+              z-index: 1000;
+              height:4.3rem; 
+              text-decoration: none; 
+              color: white;
+              font-size:1.6rem; 
+              align-content: center;
+              background-color: #ff59db; 
+              padding: 10px 15px; 
+              border-radius: 5px; 
+              box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        日程清单</a>
+    <div class="maincontainer">
+        <a href="https://www.coe.pku.edu.cn/"><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></a>
+        <div class="titlecontainer">
+            <div class="title">课程表</div>
+            <div class="date">{{getDate()}}</div>
+        </div>
+    </div>
+    
+    <div class="box">
+        <table class="table">
+        <tr id="header">
+            <th></th>
+            <th>星期日</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+        </tr>
+        <tr id="even">
+            <th>第一节</th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="odd">
+            <th>第二节</th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+            <tr id="even">
+            <th>第三节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="odd">
+            <th>第四节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="even">
+            <th>第五节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="odd">
+            <th>第六节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="even">
+            <th>第七节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        <tr id="odd">
+            <th>第八节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="even">
+            <th>第九节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="odd">
+            <th>第十节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="even">
+            <th>第十一节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        <tr id="odd">
+            <th>第十二节<br></th>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+            <td><div class="container"><div class="text"></div><button class="editbtn" onclick="edit(this)">编 辑</button></div></td>
+        </tr>
+        </table>
+    </div>
+</body>
+<script>
+function edit(button) {
+    const td = button.parentNode.parentNode;
+    const tr = td.parentNode;
+    const period = tr.rowIndex;
+    const day = td.cellIndex - 1;
+    const key = `course_${day}_${period}`;
+    
+    const textDiv = td.querySelector('.text');
+    const courseName = prompt('请输入课程名：', textDiv.innerHTML || '');
+    
+    if (courseName) {
+        textDiv.innerHTML = courseName.trim();
+        localStorage.setItem(key, courseName.trim());
+    }
+}
+
+function loadCourses() {
+    const courseCells = document.querySelectorAll('.table tr:not(#header) td');
+    courseCells.forEach(cell => {
+        const tr = cell.parentNode;
+        const period = tr.rowIndex;
+        const day = cell.cellIndex - 1;
+        const key = `course_${day}_${period}`;
+        const savedCourse = localStorage.getItem(key);
+        
+        if (savedCourse) {
+            cell.querySelector('.text').innerHTML = savedCourse;
+        }
+    });
+}
+
+function getDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+    const weekday = weekdays[today.getDay()];
+    return `${year}年${month}月${day}日 星期${weekday}`;
+}
+
+window.onload = function() {
+    loadCourses();
+    document.querySelector('.date').innerHTML = getCurrentDate();
+};
+</script>
+
+<style>
+        * {
+            font-family: 'songti', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 10px;
+            height: 100%;
+        }
+        html::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(44,114,251,1), rgb(226, 109, 255), rgb(255, 83, 140)) no-repeat;
+            z-index: -1;
+        }
+        ::selection {
+            color: #fff;
+            background: rgb(255, 13, 13);
+        }
+        .maincontainer{
+            display:flex;
+            justify-content:space-around;
+        }
+        .titlecontainer{
+            justify-content: center;
+            align-content: center;
+        }
+        .title {
+            font-size: 5rem;
+            color: black;
+            text-align: center;
+            margin-top:4rem;
+            font-weight: 700;
+        }
+        .date {
+            font-size: 18px;
+            color: black;
+            text-align: center;
+            margin-top: 2rem;
+            font-weight: 500;
+        }
+#gxcwel{
+    width:28rem;
+    height:auto;
+    margin-left: 15%;
+    margin-top: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.75;
+    transition: 150ms ease;
+}
+#gxcwel:hover{
+    opacity: 1;
+    border-radius: 50px;
+    transform: scale(1.1);
+    transition: 150ms ease;
+}
+        .box {
+            width: 80%;
+            height:250rem;
+            margin: 3% auto;
+            padding: 0 1.5rem;
+        }
+        .box .table {
+            width: 100%;
+            min-height:125rem; 
+            height:auto;
+            margin: 0 auto;
+            border-collapse: collapse; 
+            font-size: 2.2rem; 
+            border-radius: 2rem; 
+            overflow: hidden; 
+            border: 2px solid rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+        }
+        #header {
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+        }
+        #header th {
+            padding: 1.5rem 0; 
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
+        #even {
+            background: rgba(127,229,255,0.4);
+        }
+        #odd {
+            background: rgba(255,112,255,0.3);
+        }
+.container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:auto;
+    border: 2px solid rgba(0,0,0,0);
+}
+.container .text {
+    flex-wrap: wrap;
+    flex: 1; 
+    font-size: 1.55rem;
+    text-align: left;
+}
+.editbtn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgba(103, 106, 248, 0.6);
+    color: rgba(0,0,0,0.6);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+.editbtn:hover {
+    background-color: rgba(103, 106, 248, 1);
+    color: black;
+}
+    </style>
+
+</html>
