@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="register.css">
-    <title>日程清单_账户</title>
+    <title>日程清单_账号注册</title>
     <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
 </head>
 <body>
-    <div class="box" id="auth-container">   
+    <img src="gxy.png" 
+        style="width: 38rem; 
+        height: auto;
+        margin-left:15%;  
+        padding-top: 50px;" 
+        alt="图片加载失败">
+    </img>>
+    <div class="boxes" id="auth-container">   
         <div class="left"></div>
         <div class="right">
             <form action="PC.html" method="GET" id="register-form" style="display: none;">
@@ -23,12 +30,13 @@
             
         </form>
         <form action="PC.html" method="GET" id="login-form">
-            <h4 class="log" style="display: flex; justify-content: center; align-items: center;">登录</h4>
-                <input class="login" type="text" placeholder="用户名">
+            <h4 class="log" style="display: flex; justify-content: center; align-items: center;">登录</h4>  
+                <input class="login" type="text" placeholder="用户名" id="username-input">
                 //登录和注册页面都只有UI,没有实际功能
-                <input class="login" type="password" placeholder="密码">
-                //建议直接点击登录进入主界面
-                <button class="submit2" type="submit">登 录</button>
+                <input class="login" type="password" placeholder="密码" id="password-input">
+                //用户名和密码都填1点击登录即可进入主界面
+                <div class="error-tip" style="display: none; color: red; margin-top: 10px;"></div>
+                <button class="submit" type="submit">登 录</button>
                 //哦耶这是工院官网链接https://www.coe.pku.edu.cn/
             
         </form>
@@ -56,12 +64,15 @@
             }
         });
 
-        const form = document.querySelector('form');
+        const form = document.getElementById('register-form');
         const contactInputs = document.querySelectorAll('.contact-input');
         const errorTip = document.querySelector('.error-tip');
         const passwordInput = document.querySelector('input[type="password"]');
         const confirmPasswordInput = document.querySelector('input[type="password"]:nth-of-type(2)');
-        const saveBtn = document.querySelector('submit');
+        const password = passwordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+        const saveBtn = document.querySelector('button[type="submit"]');
+        const username = document.querySelector('.acc-contact-input').value.trim();
         contactInputs.forEach(input => {
             input.addEventListener('input', () => {
                 errorTip.style.display = 'none';
@@ -104,23 +115,12 @@
                 errorTip.style.display = 'block';
                 return;
             }
-            if (passwordInput.value !== confirmPasswordInput.value) {
+            if (password.value !== confirmPassword.value) {
                 e.preventDefault();
                 alert('两次输入密码不一致');
                 errorTip.style.display = 'block';
                 return;
             }
-        });
-        saveBtn.addEventListener('click', function() {
-            const username = usernameInput.value.trim();
-            const phone = phoneInput.value.trim();
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            const confirmPassword = confirmPasswordInput.value.trim();
-            if (password,value !== confirmPassword.value) {
-                alert('确认密码与密码不一致，请重新输入！');
-                return;
-        }
         const userInfo = {
             username: username,
             phone: phone,
@@ -131,25 +131,37 @@
         alert('注册成功！');
         window.location.href = 'login.html';
     });
-    const useform = document.querySelector('form');
-    useform.addEventListener('acc', function(e) {
-        const username = document.querySelector('input[type="text"]').value.trim();
-        const password = document.querySelector('input[type="password"]').value;
+    const loginform = document.getElementById('login-form');
+    loginform.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        const username = document.getElementById('username-input').value.trim(); 
+        const password = document.getElementById('password-input').value;
         const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        const errorTip = document.querySelector('.error-tip');
+        /*if (!username || !password) {
+            e.preventDefault();
+            alert('用户名或密码不能为空');
+            errorTip.style.display = 'block';
+            return;
+        }*/
         if (!storedUserInfo || storedUserInfo.username !== username || storedUserInfo.password !== password) {
             e.preventDefault();
             alert('用户名或密码错误');
-        } else {
-            alert('登录成功！');
-        }
+            errorTip.style.display = 'block';
+            return;
+        } 
+        if (errorTip) errorTip.style.display = 'none'; 
+        alert('登录成功！');
+        loginForm.submit();
     });
     console.log("byd页面终于正常了");
-    console.log("不会后端是这样的，只能套个空壳");
-    console.log("如果看到这条，请一定记住：登录和注册页面都只有UI,没有实际功能，所以注册时手机号输入13345654321即可，邮箱不需要输入,密码不要用自己的常用密码");
-    console.log("其实还有更方便的办法，就是直接点击登录，登录没有设限制，啥都不用输入就能进入功能界面");
-    console.log("还没有做登录状态，因为懒");
+    console.log("登录验证不停报错所以注释了");
+    console.log("不会后端是这样的_只能套个空壳");
+    console.log("如果看到这条_请一定记住_登录和注册页面都只有UI_没有实际功能_所以注册时手机号输入13345654321即可，邮箱不需要输入,密码不要用自己的常用密码");
+    console.log("其实还有更方便的办法_就是直接点击登录_登录没有设限制_啥都不用输入就能进入功能界面");
+    console.log("还没有做登录状态_因为懒");
     console.log("全部由你们的浩展大王单独完成");
-    console.log("本人是菜鸟，水平有限，各位大佬发现问题可以告诉我或者直接帮我修复，但不准在背后骂我");
+    console.log("本人是菜鸟_水平有限_各位大佬发现问题可以告诉我或者直接帮我修复_但不准在背后骂我");
     console.log("2025年9月2日晚23时32分");
 </script>
 <style>
@@ -177,14 +189,14 @@ html::before{
     color:#fff;
     background:rgb(255, 13, 13);
 }
-.box{
+.boxes{
     display: flex;
     overflow: hidden;
     width: 90rem;
     height: 55rem;
     background-color:rgba(255,255,255,60%) ;
     border-radius: 1.5rem;
-    margin: 10% auto;
+    margin: 5% auto;
     box-shadow: 0 0 1rem 0.2rem rgb(0,0,0,10%);
 }
 .left{
@@ -331,7 +343,7 @@ html::before{
     opacity: 1;
     animation: animation 12s linear infinite;
 }
-.right .submit2{
+/*.right .submit2{
     width: 60%;
     height:5rem;
     color:white;
@@ -339,7 +351,7 @@ html::before{
     font-size:2rem;
     border:none;
     border-radius: 0.5rem;
-    margin: 6rem 0 0 50%;
+    margin: 4rem 0 0 50%;
     transform: translateX(-50%);
 }
 .right .submit2:hover{
@@ -362,7 +374,7 @@ html::before{
     filter: blur(20px);
     opacity: 1;
     animation: animation 12s linear infinite;
-}
+}*/
 .right form .login{
     outline: none;
     width: 80%;
@@ -415,7 +427,4 @@ html::before{
 }
 </style>
 </body>
-
 </html>
-
-
