@@ -9,13 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
 </head>
 <body>
-    <!--<img src="gxy.png" 
+    <img src="gxy.png" 
         style="width: 38rem; 
         height: auto;
         margin-left:15%;  
         padding-top: 50px;" 
         alt="图片加载失败">
-    </img>>-->
+    </img>
     <div class="boxes" id="auth-container">   
         <div class="left"></div>
         <div class="right">
@@ -138,18 +138,18 @@
         const password = document.getElementById('password-input').value;
         const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
         const errorTip = document.querySelector('.error-tip');
-        /*if (!username || !password) {
+        if (!username || !password) {
             e.preventDefault();
             alert('用户名或密码不能为空');
             errorTip.style.display = 'block';
             return;
-        }*/
-        if (!storedUserInfo || storedUserInfo.username !== username || storedUserInfo.password !== password) {
+        }
+        /*if (!storedUserInfo || storedUserInfo.username !== username || storedUserInfo.password !== password) {
             e.preventDefault();
             alert('用户名或密码错误');
             errorTip.style.display = 'block';
             return;
-        } 
+        } */
         if (errorTip) errorTip.style.display = 'none'; 
         alert('登录成功！');
         loginForm.submit();
@@ -428,5 +428,6 @@ html::before{
 </style>
 </body>
 </html>
+
 
 
