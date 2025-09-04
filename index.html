@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="bk_colour.css">
     <title>日程清单_账户</title>
     <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
 </head>
 <body>
-    <div><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></div>
+    <div><a href="https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click"><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></a></div>
     <div class="boxes" id="auth-container">   
         <div class="left"></div>
         <div class="right">
@@ -57,6 +57,7 @@
         });
 
         const form = document.getElementById('register-form');
+        
         const contactInputs = document.querySelectorAll('.contact-input');
         const errorTip = document.querySelector('.error-tip');
         const passwordInput = document.querySelector('input[type="password"]');
@@ -70,81 +71,88 @@
                 errorTip.style.display = 'none';
             });
         });
-        form.addEventListener('submit', function(e) {
-            const hasUsername = document.querySelector('.acc-contact-input').value.trim() !== '';
-            if (!hasUsername) {
-                e.preventDefault();
-                alert('用户名不能为空');
-                errorTip.style.display = 'block';
-                return;
-            }
-            const hasContact = Array.from(contactInputs).some(input => input.value.trim() !== '');
-            if (!hasContact) {
-                e.preventDefault();
-                alert('手机号或邮箱请至少填写一项');
-                errorTip.style.display = 'block';
-                return;
-            }
-            const phone = contactInputs[0].value.trim();
-            const phoneRegex = /^1[3-9]\d{9}$/;
-            if (phone && !phoneRegex.test(phone)) {
-                e.preventDefault();
-                alert('手机号格式不正确');
-                errorTip.style.display = 'block';
-                return;
-            }
-            const email = contactInputs[1].value.trim();
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (email && !emailRegex.test(email)) {
-                e.preventDefault();
-                alert('邮箱格式不正确');
-                errorTip.style.display = 'block';
-                return;
-            }
-            if(passwordInput.value.length < 8) {
-                e.preventDefault();
-                alert('密码长度不能少于8位');   
-                errorTip.style.display = 'block';
-                return;
-            }
-            if (password.value !== confirmPassword.value) {
-                e.preventDefault();
-                alert('两次输入密码不一致');
-                errorTip.style.display = 'block';
-                return;
-            }
-        const userInfo = {
-            username: username,
-            phone: phone,
-            email: email,
-            password: password
-        };
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-        alert('注册成功！');
-        window.location.href = 'login.html';
-    });
+    form.addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const usernameInput = this.querySelector('.acc-contact-input');
+    const phoneInput = this.querySelector('input[type="phone"]'); 
+    const emailInput = this.querySelector('input[type="email"]');
+    const passwordInput = this.querySelector('input[type="password"]:nth-of-type(1)');
+    const confirmPasswordInput = this.querySelector('input[type="password"]:nth-of-type(2)');
+
+    const username = usernameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+    if (!username) {
+        alert('用户名不能为空');
+        errorTip.style.display = 'block';
+        return;
+    }
+    if (!phone && !email) {
+        alert('手机号或邮箱请至少填写一项');
+        errorTip.style.display = 'block';
+        return;
+    }
+    const phoneRegex = /^1[3-9]\d{9}$/;
+    if (phone && !phoneRegex.test(phone)) {
+        alert('手机号格式不正确');
+        errorTip.style.display = 'block';
+        return;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (email && !emailRegex.test(email)) {
+        alert('邮箱格式不正确');
+        errorTip.style.display = 'block';
+        return;
+    }
+    if (password.length < 8) {
+        alert('密码长度不能少于8位');
+        errorTip.style.display = 'block';
+        return;
+    }
+    if (password !== confirmPassword) {
+        alert('两次输入密码不一致');
+        errorTip.style.display = 'block';
+        return;
+    }
+    const userInfo = {
+        username: username,
+        phone: phone,
+        email: email,
+        password: password
+    };
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    alert('注册成功！');
+    loginForm.style.display = 'block';
+    registerForm.style.display = 'none';
+    toggleButton.textContent = '还没有账号？去注册';
+    document.getElementById('username-input').value = username;
+    this.reset();
+});
+
     const loginform = document.getElementById('login-form');
     loginform.addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        const username = document.getElementById('username-input').value.trim(); 
-        const password = document.getElementById('password-input').value;
-        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
-        const errorTip = document.querySelector('.error-tip');
-        if (!username || !password) {
-            e.preventDefault();
-            alert('用户名或密码不能为空');
-            errorTip.style.display = 'block';
-            return;
-        }
-        /*if (!storedUserInfo || storedUserInfo.username !== username || storedUserInfo.password !== password) {
-            e.preventDefault();
-            alert('用户名或密码错误');
-            errorTip.style.display = 'block';
-            return;
-        } */
-        if (errorTip) errorTip.style.display = 'none'; 
-        alert('登录成功！');
-        loginForm.submit();
+    e.preventDefault(); 
+
+    const username = document.getElementById('username-input').value.trim(); 
+    const password = document.getElementById('password-input').value;
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const errorTip = document.querySelector('.error-tip');
+
+    if (!username || !password) {
+        alert('用户名或密码不能为空');
+        errorTip.style.display = 'block';
+        return;
+    }
+    /*if (!storedUserInfo || storedUserInfo.username !== username || storedUserInfo.password !== password) {
+        alert('用户名或密码错误');
+        errorTip.style.display = 'block';
+        return;
+    }*/
+    if (errorTip) errorTip.style.display = 'none'; 
+    alert('登录成功！');
+    this.submit();
     });
     console.log("byd页面终于正常了");
     console.log("登录验证不停报错所以注释了");
@@ -157,29 +165,6 @@
     console.log("2025年9月2日晚23时32分");
 </script>
 <style>
-*{
-    font-family: 'SongTi', sans-serif;
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-html{
-    font-size: 10px;
-}
-html::before{
-    content: "";
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:linear-gradient(to right,rgb(116, 192, 255), rgb(109, 148, 255))no-repeat;
-    z-index: -1;
-}
-::selection{
-    color:#fff;
-    background:rgb(255, 13, 13);
-}
 #gxcwel{
     width:28rem;
     height:auto;
