@@ -9,23 +9,15 @@
     
 </head>
 <body>
-    <a href="PC.html" 
-       style="position: fixed; 
-              top: 25px; 
-              left: 4%; 
-              z-index: 1000;
-              height:4.3rem; 
-              text-decoration: none; 
-              color: white;
-              font-size:1.6rem; 
-              align-content: center;
-              background-color: #ff59db; 
-              padding: 10px 15px; 
-              border-radius: 5px; 
-              box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-        日程清单</a>
     <div class="maincontainer">
-        <a href="https://www.coe.pku.edu.cn/"><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></a>
+        <div class="selecting">
+            <div><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></div>
+            <div class="selector">
+                <div>
+                    <a href="PC.html" id="PClink">日程清单</a>
+                </div>  
+            </div>
+        </div>
         <div class="titlecontainer">
             <div class="title">课程表</div>
             <div class="date">{{getDate()}}</div>
@@ -232,7 +224,7 @@ window.onload = function() {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, rgba(44,114,251,1), rgb(226, 109, 255), rgb(255, 83, 140)) no-repeat;
+            background:linear-gradient(to right,rgb(116, 192, 255), rgb(109, 148, 255))no-repeat;
             z-index: -1;
         }
         ::selection {
@@ -240,8 +232,10 @@ window.onload = function() {
             background: rgb(255, 13, 13);
         }
         .maincontainer{
+            margin-left: 10%;
+            width:80%;
             display:flex;
-            justify-content:space-around;
+            justify-content:space-between;
         }
         .titlecontainer{
             justify-content: center;
@@ -261,23 +255,99 @@ window.onload = function() {
             margin-top: 2rem;
             font-weight: 500;
         }
-#gxcwel{
-    width:28rem;
-    height:auto;
-    margin-left: 15%;
+.selecting {
+    width: 25rem;
+    height: 25rem;
+    overflow: hidden;
+    gap: 0.5rem;
     margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    transition: all 150ms ease;
+    border-radius: 50%;
+    position: relative;
+}
+
+.selecting:hover {
+    width: 50rem;
+    height: 30rem;
+    border-radius: 3rem;
+}
+.selecting:hover #gxcwel {
+    opacity: 1;
+    width: 28rem; 
+}
+.selecting:hover .selector {
+    opacity: 1;
+    transform: translateX(0) translateY(-200%);
+}
+
+#gxcwel {
+    width: 25rem;
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
     z-index: -2;
     opacity: 0.75;
-    transition: 150ms ease;
+    transition: all 150ms ease;
+    transform-origin: center; 
 }
-#gxcwel:hover{
+
+.selector {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-150%) translateX(250%); 
+    opacity: 0;
+    transition: all 300ms ease;
+    transition-property: opacity, transform;
+}
+
+#PClink {
+    position:relative;
+    z-index: 1000;
+    height: 6rem;
+    width: 25rem;
+    text-align: right;
+    color: white;
+    font-size: 1.8rem;
+    opacity: 0.8;
+    border-radius: 1.5rem;
+    padding: 0 1.5rem 0 5rem;
+    line-height: 6rem;
+    background: radial-gradient(circle at left bottom, transparent 9rem, dodgerblue 0) left bottom;
+    transition: 150ms ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    margin-right: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+#PClink:hover {
+    transform: scale(1.05);
     opacity: 1;
-    border-radius: 50px;
-    transform: scale(1.1);
-    transition: 150ms ease;
 }
+#PClink::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -2;
+    background: radial-gradient(circle at left bottom, transparent 9rem, dodgerblue 0) left bottom;
+    background-size: 400%;
+    border-radius: 1.8rem;
+    opacity: 0;
+    transition: opacity 150ms ease;
+}
+#PClink:hover::after {
+    filter: blur(5px);
+    opacity: 0.75;
+    animation: animation 12s linear infinite;
+}
+
         .box {
             width: 80%;
             height:250rem;
@@ -293,7 +363,7 @@ window.onload = function() {
             font-size: 2.2rem; 
             border-radius: 2rem; 
             overflow: hidden; 
-            border: 2px solid rgba(0,0,0,0.3);
+            border: 2px solid rgba(0,0,0,0.8);
             box-shadow: 0 0 20px rgba(0,0,0,0.1); 
         }
         #header {
@@ -305,10 +375,10 @@ window.onload = function() {
             border: 1px solid rgba(255,255,255,0.1); 
         }
         #even {
-            background: rgba(127,229,255,0.4);
+            background: rgba(84, 221, 255, 0.4);
         }
         #odd {
-            background: rgba(255,112,255,0.3);
+            background: rgba(85, 139, 255, 0.3);
         }
 .container{
     display:flex;
@@ -327,15 +397,16 @@ window.onload = function() {
     padding: 0.6rem 1.2rem;
     border: none;
     border-radius: 0.5rem;
-    background-color: rgba(103, 106, 248, 0.6);
+    background-color: rgba(247, 244, 255, 0.6);
     color: rgba(0,0,0,0.6);
     cursor: pointer;
     transition: background-color 150ms ease;
 }
 .editbtn:hover {
-    background-color: rgba(103, 106, 248, 1);
+    background-color: rgba(247, 244, 255, 0.85);
+    scale:1.05;
     color: black;
 }
     </style>
 
-</html>
+</html>7
