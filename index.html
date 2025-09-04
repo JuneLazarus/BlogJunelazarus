@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bk_colour.css">
     <title>日程清单_账户</title>
     <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
@@ -165,6 +164,30 @@
     console.log("2025年9月2日晚23时32分");
 </script>
 <style>
+    * {
+            font-family: 'songti', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 10px;
+            height: 100%;
+        }
+        html::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:linear-gradient(to right,rgb(116, 192, 255), rgb(109, 148, 255))no-repeat;
+            z-index: -1;
+        }
+        ::selection {
+            color: #fff;
+            background: rgb(255, 13, 13);
+        }
 #gxcwel{
     width:28rem;
     height:auto;
