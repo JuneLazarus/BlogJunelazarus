@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <link rel="stylesheet" href="bk_colour.css">
+    <link rel="stylesheet" href="navigator.css">
+    <title>JuneLazarus|大厅</title>
+    <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
+</head>
+<body>
+    <div class="viewpage">
+    <div class="maincontainer">
+        <div class="selecting">
+            <div><a href="hall.html"><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></a></div>
+            <div class="selector">
+                <div>
+                    <a href="creator.html" id="todolink">作者简介</a>
+                </div>   
+                <div>
+                    <a href="index.html" id="exitlink">退出登录</a>
+                </div>  
+                <div>
+                    <a href="diary.html" id="courselink">开发日志</a>
+                </div>  
+            </div>
+        </div>
+    </div>
+        <div class="scrollpage">
+            <a href="course.html"><img src="Kun.jpg" class="bg"></a>
+            <a href="todolist.html"><img src="Kun.jpg" class="bg"></a>
+            <img src="Kun.jpg" class="bg">
+            <img src="Kun.jpg" class="bg">
+        </div>
+    </div>
+</body>
+<style>
+
+.maincontain{
+    padding-left: 10%;
+    width:100%;
+    display: flex;
+    padding-right:0rem;
+    justify-content: space-between;
+}
+
+body{
+    height:auto;
+}
+
+.bg{
+    opacity:0.85;
+    height:100vh;
+    border-radius:5rem;
+    object-fit: cover;
+    animation:appear linear;
+    animation-timeline:view();
+    animation-range: entry 0 cover 40%;
+    transition: all 300ms ease;
+}
+.bg:hover{
+    scale:0.95;
+    opacity:0.9;
+}
+
+.selection {
+    width: 25rem;
+    height: 25rem;
+    overflow: hidden;
+    gap: 0.5rem;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    transition: all 150ms ease;
+    border-radius: 50%;
+    position: relative;
+}
+
+.selection:hover {
+    width: 50rem;
+    height: 30rem;
+    border-radius: 3rem;
+}
+.selection:hover #gxcwel {
+    opacity: 1;
+    width: 28rem; 
+}
+.selection:hover .selector{
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+.viewpage{
+    margin-right: 0;
+    right: 0;
+    padding-right: 0;
+    position:fixed;
+    top:0;
+    display:flex;
+    align-items: flex-start;
+    width: 100%;
+    height:100vh;
+    overflow-y: auto;
+}
+
+.scrollpage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    flex-shrink: 0;
+}
+@keyframes appear{
+    from{
+        opacity: 0;
+        transform: translateX(40rem);
+        scale:0.75;
+    }
+    to{
+        opacity: 0.85;
+        transform: translateX(0);
+        scale:1;
+    }
+}
+
+</style>
+
+<script>
+
+function refresh(){
+    viewpage.scrollTo(0,0);
+}
+viewpage.addEventListener("scroll",handleScroll);
+window.addEventListener("load",resetScroll);
+
+</script>
+</html>
