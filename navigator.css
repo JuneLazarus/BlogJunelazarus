@@ -1,0 +1,97 @@
+.maincontainer{
+            margin-left: 10%;
+            width:80%;
+            /*display:flex;
+            justify-content:space-between;*/
+        }
+.selecting {
+    width: 25rem;
+    height: 25rem;
+    overflow: hidden;
+    gap: 0.5rem;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    transition: all 150ms ease;
+    border-radius: 50%;
+    position: relative;
+}
+
+.selecting:hover {
+    width: 50rem;
+    height: 30rem;
+    border-radius: 5rem;
+}
+.selecting:hover #gxcwel {
+    opacity: 1;
+    width: 28rem; 
+}
+.selecting:hover .selector {
+    opacity: 1;
+    transform: translateX(0) translateY(-200%);
+}
+
+#gxcwel {
+    width: 25rem;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.75;
+    transition: all 150ms ease;
+    transform-origin: center; 
+}
+
+.selector {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-150%) translateX(250%); 
+    opacity: 0;
+    transition: all 300ms ease;
+    transition-property: opacity, transform;
+}
+
+#PClink {
+    position:relative;
+    z-index: 1000;
+    height: 6rem;
+    width: 25rem;
+    text-align: right;
+    color: white;
+    font-size: 1.8rem;
+    opacity: 0.8;
+    border-radius: 1.5rem;
+    padding: 0 1.5rem 0 5rem;
+    line-height: 6rem;
+    background: radial-gradient(circle at left bottom, transparent 9rem, dodgerblue 0) left bottom;
+    transition: 150ms ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    margin-right: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+#PClink:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+#PClink::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -2;
+    background: radial-gradient(circle at left bottom, transparent 9rem, dodgerblue 0) left bottom;
+    background-size: 400%;
+    border-radius: 1.8rem;
+    opacity: 0;
+    transition: opacity 150ms ease;
+}
+#PClink:hover::after {
+    filter: blur(5px);
+    opacity: 0.75;
+}
