@@ -3,37 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bk_colour.css">
+    <link rel="stylesheet" href="navigator.css">
     <title>日程清单</title>
     <script src="https://cdn.staticfile.net/vue/3.0.5/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
 </head>
 <body>
-    <a href="course.html" 
-       style="position: fixed; 
-              top: 25px; 
-              left: 4%; 
-              z-index: 1000; 
-              text-decoration: none; 
-              color: white; 
-              background-color: #007BFF; 
-              opacity: 0.8;
-              padding: 10px 15px; 
-              border-radius: 5px; 
-              box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-        课程表</a>
-        <a href="index.html" 
-       style="position: fixed; 
-              top: 25px; 
-              right: 4%; 
-              z-index: 1000; 
-              text-decoration: none; 
-              color: white; 
-              background-color: #903bff; 
-              opacity:0.8;
-              padding: 10px 15px; 
-              border-radius: 5px; 
-              box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-        登录</a>
+    <div class="maincontainer">
+        <div class="selecting">
+            <div><a href="index.html"><img src="gxc2.jpg" alt="工小成还在赶来的路上~" id="gxcwel"></img></a></div>
+            <div class="selector">
+                <div>
+                    <a href="course.html" id="PClink">课程表</a>
+                </div>  
+            </div>
+        </div>
+    </div>
     <div id="app">
         <div class="todo-list">
             <div class="title">日程表</div>
@@ -236,4 +222,3 @@
     </img>
 </body>
 </html>
-
